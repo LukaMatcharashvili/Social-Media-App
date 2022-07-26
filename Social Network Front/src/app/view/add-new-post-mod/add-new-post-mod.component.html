@@ -1,0 +1,38 @@
+<mat-dialog-content>
+  <div class="new-post-top">
+    <textarea
+      [(ngModel)]="content"
+      placeholder="What's on your mind, {{ userData.username }}?"
+      cols="30"
+      rows="1"
+    ></textarea>
+  </div>
+  <input
+    (change)="onImageUpload($event)"
+    style="display: none"
+    #imgInp
+    type="file"
+  />
+  <div class="new-post-middle">
+    <div (click)="onImageUploadBtnClick(imgInp)">
+      <i
+        [ngStyle]="{
+          color: 'rgb(40, 206, 40)'
+        }"
+        class="fa-solid fa-images new-post-action"
+      ></i>
+      <p>Add Photo</p>
+    </div>
+  </div>
+  <img *ngIf="uploadedImage" [src]="uploadedImage" />
+  <button
+    [disabled]="!content && !uploadedImage"
+    (click)="onSubmit()"
+    style="margin-top: 20px"
+    class="add-new-btn"
+    mat-raised-button
+    color="primary"
+  >
+    Post
+  </button>
+</mat-dialog-content>

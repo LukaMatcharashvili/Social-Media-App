@@ -1,0 +1,17 @@
+<mat-dialog-content>
+  <article *ngFor="let like of likes">
+    <div
+      mat-dialog-close
+      routerLink="/profile/{{ like._id }}"
+      class="image pointer"
+    >
+      <img [src]="like.profilePic" width="40px" height="40px" />
+    </div>
+    <span
+      mat-dialog-close
+      class="pointer"
+      routerLink="/profile/{{ like._id }}"
+      >{{ like.username }}</span
+    >
+  </article>
+</mat-dialog-content>

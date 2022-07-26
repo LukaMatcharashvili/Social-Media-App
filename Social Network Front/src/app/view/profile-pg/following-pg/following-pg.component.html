@@ -1,0 +1,26 @@
+<section>
+  <article *ngFor="let following of followings">
+    <div routerLink="/profile/{{ following._id }}" class="image pointer">
+      <img [src]="following.profilePic" width="40px" height="40px" />
+    </div>
+    <span class="pointer" routerLink="/profile/{{ following._id }}">{{
+      following.username
+    }}</span>
+    <i
+      (click)="onFollowClick(following._id)"
+      *ngIf="
+        !regUser.followings.includes(following._id) &&
+        following._id !== regUser._id
+      "
+      class="fa-solid fa-user-plus"
+    ></i>
+    <i
+      (click)="onUnfollowClick(following._id)"
+      *ngIf="
+        regUser.followings.includes(following._id) &&
+        following._id !== regUser._id
+      "
+      class="fa-solid fa-user-minus"
+    ></i>
+  </article>
+</section>

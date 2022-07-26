@@ -1,0 +1,25 @@
+<article class="tabs-box">
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    <a
+      routerLink="users"
+      [queryParams]="{ searchBody: searchBody }"
+      [active]="currentRoute.includes('/users')"
+      mat-tab-link
+    >
+      Users
+    </a>
+    <a
+      routerLink="posts"
+      [queryParams]="{ searchBody: searchBody }"
+      [active]="currentRoute.includes('/posts')"
+      mat-tab-link
+    >
+      Posts
+    </a>
+  </nav>
+</article>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+<section>
+  <router-outlet></router-outlet>
+</section>

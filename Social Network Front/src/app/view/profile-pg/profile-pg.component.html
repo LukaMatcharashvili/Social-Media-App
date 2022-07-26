@@ -1,0 +1,108 @@
+<section class="profile">
+  <header
+    style="background-image: url('{{ userData.coverPic }}');"
+    class="header"
+  >
+    <div class="details">
+      <img
+        *ngIf="userData.profilePic; else noProfile"
+        [src]="userData.profilePic"
+        class="profile-pic"
+      />
+      <ng-template #noProfile>
+        <img
+          src="data:image/png;base64,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"
+          class="profile-pic"
+        />
+      </ng-template>
+      <h1 class="heading">{{ userData.username }}</h1>
+      <div class="location">
+        <i
+          [ngStyle]="{
+            'margin-right': '10px'
+          }"
+          class="fa-solid fa-at"
+        ></i>
+        <p>{{ userData.email }}</p>
+      </div>
+
+      <div *ngIf="userData._id !== regUser._id" class="stats">
+        <div *ngIf="!regUser.followings.includes(userData._id)" class="col-4">
+          <button
+            (click)="onFollowClick(userData._id)"
+            mat-raised-button
+            color="warn"
+          >
+            Follow
+          </button>
+        </div>
+        <div *ngIf="regUser.followings.includes(userData._id)" class="col-4">
+          <button
+            (click)="onUnfollowClick(userData._id)"
+            mat-raised-button
+            color="accent"
+          >
+            Unfollow
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="userData._id === regUser._id" class="stats">
+        <div class="col-4">
+          <button (click)="logOut()" mat-raised-button color="warn">
+            Log Out
+          </button>
+        </div>
+        <div class="col-4">
+          <button
+            (click)="openUpdateUserFormBtnClick()"
+            mat-raised-button
+            color="accent"
+          >
+            Update
+          </button>
+        </div>
+        <div class="col-4">
+          <button
+            (click)="openDeleteUserModuleBtnClick()"
+            mat-raised-button
+            color="warn"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+</section>
+
+<article class="tabs-box">
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    <a
+      routerLink="posts"
+      [active]="currentRoute.includes('posts')"
+      mat-tab-link
+    >
+      Posts
+    </a>
+    <a
+      routerLink="followers"
+      [active]="currentRoute.includes('/followers')"
+      mat-tab-link
+    >
+      Followers
+    </a>
+    <a
+      routerLink="followings"
+      [active]="currentRoute.includes('/followings')"
+      mat-tab-link
+    >
+      Followings
+    </a>
+  </nav>
+</article>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+<section>
+  <router-outlet></router-outlet>
+</section>

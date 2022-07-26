@@ -1,0 +1,49 @@
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+i {
+  font-size: 1.5rem;
+}
+
+textarea,
+textarea:focus {
+  color: white;
+  width: 100%;
+  min-height: 75px;
+  resize: none;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-family: "Open Sans";
+  max-height: 75px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.new-post-middle {
+  background-color: rgb(95, 91, 91);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+img {
+  width: 100%;
+  height: 300px;
+}
+
+.new-post-middle div {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-new-btn {
+  width: 100%;
+}

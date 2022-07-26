@@ -1,0 +1,177 @@
+<div *ngIf="loader" class="spinner-box">
+  <div class="preloader"></div>
+</div>
+
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+  <mat-drawer class="bg-dark" #drawer [mode]="'over'">
+    <mat-list>
+      <mat-list-item (click)="drawer.toggle()" routerLink="/feed" class="mt-3"
+        >Feed</mat-list-item
+      >
+      <mat-list-item
+        routerLink="/profile/{{ userData._id }}"
+        (click)="drawer.toggle()"
+        class="mt-3"
+        >Profile</mat-list-item
+      >
+      <mat-divider></mat-divider>
+      <mat-expansion-panel
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> User </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list-item
+          *ngIf="!afterLoginDisplay"
+          (click)="drawer.toggle()"
+          routerLink="/"
+          class="mt-3"
+          >Register</mat-list-item
+        >
+        <mat-list-item
+          *ngIf="!afterLoginDisplay"
+          (click)="drawer.toggle()"
+          routerLink="/login"
+          class="mt-3"
+          >LogIn</mat-list-item
+        >
+        <mat-list-item
+          *ngIf="afterLoginDisplay"
+          routerLink="/profile/{{ userData._id }}"
+          (click)="drawer.toggle()"
+          class="mt-3"
+          >Profile</mat-list-item
+        >
+        <mat-list-item
+          (click)="openUpdateUserFormBtnClick()"
+          *ngIf="afterLoginDisplay"
+          (click)="drawer.toggle()"
+          class="mt-3"
+          >Update</mat-list-item
+        >
+        <mat-list-item
+          (click)="logOut()"
+          *ngIf="afterLoginDisplay"
+          (click)="drawer.toggle()"
+          class="mt-3"
+          >LogOut</mat-list-item
+        >
+        <mat-list-item
+          (click)="openDeleteUserModuleBtnClick()"
+          *ngIf="afterLoginDisplay"
+          (click)="drawer.toggle()"
+          class="mt-3"
+          >Delete User</mat-list-item
+        >
+      </mat-expansion-panel>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="pos-f-t navbar">
+      <nav class="navbar navbar-dark bg-dark">
+        <button
+          (click)="drawer.toggle()"
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarToggleExternalContent"
+          aria-controls="navbarToggleExternalContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-flex align-items-center search-inp">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <button
+                routerLink="/search"
+                [queryParams]="{ searchBody: searchValue }"
+                class="btn btn-outline-secondary"
+                type="button"
+              >
+                Search
+              </button>
+            </div>
+            <input
+              [(ngModel)]="searchValue"
+              type="text"
+              class="form-control search-input"
+              placeholder=""
+              aria-label=""
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          <button
+            class="d-none-when-small-screen"
+            [ngStyle]="{
+              color: 'white'
+            }"
+            routerLink="/feed"
+            mat-button
+          >
+            Feed
+          </button>
+          <button
+            class="d-none-when-small-screen"
+            [ngStyle]="{
+              color: 'white'
+            }"
+            routerLink="/profile/{{ userData._id }}"
+            mat-button
+          >
+            Profile
+          </button>
+          <button
+            class="d-none-when-small-screen"
+            [ngStyle]="{
+              color: 'white'
+            }"
+            mat-button
+            [matMenuTriggerFor]="menu"
+          >
+            <i class="fa-solid fa-user"></i>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button *ngIf="!afterLoginDisplay" routerLink="/" mat-menu-item>
+              Register
+            </button>
+            <button
+              *ngIf="!afterLoginDisplay"
+              routerLink="/login"
+              mat-menu-item
+            >
+              LogIn
+            </button>
+            <button
+              *ngIf="afterLoginDisplay"
+              routerLink="/profile/{{ userData._id }}"
+              mat-menu-item
+            >
+              Profile
+            </button>
+            <button (click)="logOut()" *ngIf="afterLoginDisplay" mat-menu-item>
+              LogOut
+            </button>
+            <button
+              (click)="openDeleteUserModuleBtnClick()"
+              *ngIf="afterLoginDisplay"
+              mat-menu-item
+            >
+              Delete
+            </button>
+            <button
+              (click)="openUpdateUserFormBtnClick()"
+              *ngIf="afterLoginDisplay"
+              mat-menu-item
+            >
+              Update
+            </button>
+          </mat-menu>
+        </div>
+      </nav>
+    </div>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

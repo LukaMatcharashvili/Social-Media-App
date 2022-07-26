@@ -1,0 +1,9 @@
+br {
+  display: none;
+}
+
+@media only screen and (max-width: 460px) {
+  br {
+    display: block;
+  }
+}

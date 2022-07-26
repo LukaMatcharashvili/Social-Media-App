@@ -1,0 +1,67 @@
+<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()" class="example-form">
+  <div class="image-upload-box">
+    <label>Cover Picture</label><br />
+    <input (change)="onImageUpload($event, 'coverPic')" type="file" />
+    <br />
+    <img *ngIf="coverPic" [src]="coverPic" />
+  </div>
+  <div class="image-upload-box">
+    <label>Profile Picture</label><br />
+    <input (change)="onImageUpload($event, 'profilePic')" type="file" />
+    <br />
+    <img *ngIf="profilePic" [src]="profilePic" />
+  </div>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Username</mat-label>
+    <input formControlName="username" matInput placeholder="Ex. John" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input formControlName="email" matInput placeholder="Ex. test@gmail.com" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input
+      formControlName="password"
+      matInput
+      [type]="hide ? 'password' : 'text'"
+    />
+    <button
+      type="button"
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Confirm password</mat-label>
+    <input #covfirmPasswordBtn matInput [type]="hide ? 'password' : 'text'" />
+    <button
+      type="button"
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="auth-form-actions">
+    <button
+      [disabled]="
+        userForm.invalid || covfirmPasswordBtn.value !== userForm.value.password
+      "
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Register
+    </button>
+    <a routerLink="/login">Login Instead</a>
+  </div>
+</form>

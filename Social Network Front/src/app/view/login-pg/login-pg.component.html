@@ -1,0 +1,42 @@
+<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()" class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input formControlName="email" matInput placeholder="Ex. test@gmail.com" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input
+      formControlName="password"
+      matInput
+      [type]="hide ? 'password' : 'text'"
+    />
+    <button
+      type="button"
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="auth-form-actions">
+    <button
+      [disabled]="userForm.invalid"
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Log In
+    </button>
+    <a routerLink="/">Register Instead</a>
+  </div>
+  <a
+    (click)="onForgotPasswordBtnClick()"
+    [ngStyle]="{
+      'margin-top': '20px'
+    }"
+    >Forgot Password?</a
+  >
+</form>

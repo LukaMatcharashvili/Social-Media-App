@@ -1,0 +1,49 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+[type="file"] {
+  color: #878787;
+  margin-bottom: 20px;
+}
+[type="file"]::-webkit-file-upload-button {
+  background: #ed1c1b;
+  border: 2px solid #ed1c1b;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  transition: all 1s ease;
+}
+
+[type="file"]::-webkit-file-upload-button:hover {
+  background: #fff;
+  border: 2px solid #535353;
+  color: #000;
+}
+
+.image-upload-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+img {
+  margin-bottom: 20px;
+}
+
+.auth-form-actions {
+  display: flex;
+}
+
+.auth-form-actions button,
+.auth-form-actions a {
+  width: 100%;
+}
+.auth-form-actions a {
+  text-align: center;
+}

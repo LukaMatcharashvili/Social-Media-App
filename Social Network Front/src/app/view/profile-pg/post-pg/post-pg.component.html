@@ -1,0 +1,170 @@
+<section class="posts-area">
+  <article *ngIf="userData._id === regUser._id" class="new-post">
+    <div class="new-post-top">
+      <div class="image pointer">
+        <img
+          routerLink="/profile/{{ userData._id }}"
+          [src]="userData.profilePic"
+          width="40px"
+          height="40px"
+        />
+      </div>
+      <div
+        (click)="onAddNewBtnClick()"
+        class="new-post-button"
+        role="button"
+        tabindex="0"
+      >
+        <div>
+          <span
+            style="
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              display: -webkit-box;
+            "
+            >What's on your mind, {{ userData.username }}?</span
+          >
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="new-post-bottom">
+      <div (click)="onAddNewBtnClick()">
+        <i
+          [ngStyle]="{
+            color: 'red'
+          }"
+          class="fa-solid fa-circle-plus new-post-action"
+        ></i>
+        <div><p>New Post</p></div>
+      </div>
+      <div (click)="onAddNewBtnClick()">
+        <i
+          [ngStyle]="{
+            color: 'rgb(40, 206, 40)'
+          }"
+          class="fa-solid fa-images new-post-action"
+        ></i>
+        <div>
+          <p>Picture</p>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article *ngFor="let post of posts; let postIndex = index" class="post">
+    <div class="post-top">
+      <div>
+        <div class="image pointer">
+          <img
+            routerLink="/profile/{{ post.author._id }}"
+            [src]="post.author.profilePic"
+            width="40px"
+            height="40px"
+          />
+        </div>
+        <p routerLink="/profile/{{ post.author._id }}" class="pointer">
+          {{ post.author.username }}
+        </p>
+      </div>
+
+      <button
+        *ngIf="regUser._id === post.author._id"
+        mat-button
+        [matMenuTriggerFor]="postMenu"
+      >
+        <i class="fa-solid fa-ellipsis-vertical three-dots"></i>
+      </button>
+      <mat-menu #postMenu="matMenu">
+        <button (click)="onPostUpdateBtnClick(post._id)" mat-menu-item>
+          Update
+        </button>
+        <button (click)="onPostDeleteBtnClick(post._id)" mat-menu-item>
+          Delete
+        </button>
+      </mat-menu>
+    </div>
+    <div class="post-middle">
+      <p>{{ post.content }}</p>
+      <img
+        routerLink="/post/{{ post._id }}"
+        *ngIf="post.image"
+        class="post-image pointer"
+        [src]="post.image"
+      />
+    </div>
+    <div class="post-bottom">
+      <div class="post-actions">
+        <span>{{ post.likes.length }}</span>
+        <i
+          *ngIf="post.likes.includes(regUser._id)"
+          (click)="onUnlike(post._id, postIndex)"
+          class="fa-solid fa-heart post-action pointer"
+        ></i>
+        <i
+          *ngIf="!post.likes.includes(regUser._id)"
+          (click)="onLike(post._id, postIndex)"
+          class="fa-regular fa-heart post-action pointer"
+        ></i>
+        <i
+          (click)="onCommentBtnClick(commentsBox)"
+          class="fa-regular fa-comment post-action pointer"
+        ></i>
+      </div>
+      <div #commentsBox class="comments-box">
+        <div
+          *ngFor="
+            let comment of posts[postIndex].comments;
+            let commentIndex = index
+          "
+        >
+          <mat-divider></mat-divider>
+          <div class="comment">
+            <div>
+              <div class="image pointer">
+                <img
+                  [src]="comment.author.profilePic"
+                  width="40px"
+                  height="40px"
+                />
+              </div>
+              <p>{{ comment.author.username }}</p>
+            </div>
+            <button
+              *ngIf="comment.author._id === regUser._id"
+              mat-button
+              [matMenuTriggerFor]="commentMenu"
+            >
+              <i class="fa-solid fa-ellipsis-vertical three-dots"></i>
+            </button>
+            <mat-menu #commentMenu="matMenu">
+              <button
+                (click)="onCommentDelete(comment._id, commentIndex, postIndex)"
+                mat-menu-item
+              >
+                Delete
+              </button>
+            </mat-menu>
+          </div>
+          <p>{{ comment.content }}</p>
+        </div>
+        <div class="comment-input-box">
+          <textarea
+            #commentInp
+            (input)="onInp(commentInp)"
+            cols="30"
+            rows="1"
+            class="comment-input"
+            placeholder="Add a comment..."
+          ></textarea>
+          <button
+            (click)="onPostCommentBtnClick(commentInp, post._id, postIndex)"
+            class="comment-btn"
+            [disabled]="commentInp.value == ''"
+          >
+            Comment
+          </button>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
